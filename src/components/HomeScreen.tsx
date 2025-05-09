@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Asset } from '../types';
-import Icon from 'react-native-vector-icons/Ionicons'; // Usa Ionicons per l'icona del bidone
+import { Ionicons } from '@expo/vector-icons';
 
 const HomeScreen = ({ navigation }: { navigation: any }) => {
   const [assets, setAssets] = useState<Asset[]>([]);
@@ -33,7 +33,13 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
   }, [navigation]);
 
   const renderAsset = ({ item }: { item: Asset }) => {
-    const formattedDate = new Date(parseInt(item.id)).toLocaleDateString(); // Converte l'id in una data leggibile
+    const formattedDate = new Date(parseInt(item.id)).toLocaleString('it-IT', { 
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+  });  
 
     return (
       <View style={styles.assetItem}>
@@ -43,11 +49,12 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
         />
         <View style={[styles.colorBox, { backgroundColor: item.color }]} />
         <View style={styles.assetDetails}>
+        <Text style={styles.titleText}>{item.title}</Text>
           <Text style={styles.fontText}>{item.font}</Text>
           <Text style={styles.dateText}>{formattedDate}</Text>
         </View>
         <TouchableOpacity onPress={() => deleteAsset(item.id)}>
-          <Icon name="trash-outline" size={24} color="tomato" />
+          <Ionicons name="trash-outline" size={24} color="tomato" />
         </TouchableOpacity>
       </View>
     );
@@ -103,8 +110,11 @@ const styles = StyleSheet.create({
   assetDetails: {
     flex: 1,
   },
-  fontText: {
+  titleText: {
     fontSize: 16,
+  },
+  fontText: {
+    fontSize: 14,
   },
   dateText: {
     fontSize: 14,

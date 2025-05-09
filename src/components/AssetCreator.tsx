@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, ImageBackground } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Font from 'expo-font';
-import AppLoading from 'expo-app-loading';
 import ImageSelector from './ImageSelector';
 import ColorSelector from './ColorSelector';
 import FontSelector from './FontSelector';
 import { fonts } from '../utils/colorUtils'; // Importa i font
+import * as SplashScreen from 'expo-splash-screen';
 
 const AssetCreator = ({ navigation }: { navigation: any }) => {
   const [fontsLoaded, setFontsLoaded] = useState(false);
@@ -15,19 +15,29 @@ const AssetCreator = ({ navigation }: { navigation: any }) => {
   const [font, setFont] = useState<string | null>('CalSans-Regular');
   const [title, setTitle] = useState<string>('Preview Title');
 
+  useEffect(() => {
+    // Impedisce che la splash screen si nasconda automaticamente
+    SplashScreen.preventAutoHideAsync();
+  }, []);
+
   const loadFonts = async () => {
     const fontMap = fonts.reduce((acc, font) => ({ ...acc, ...font }), {}); // Combina i font in un unico oggetto
     await Font.loadAsync(fontMap);
+    setFontsLoaded(true);
   };
 
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync(); // Nasconde la splash screen quando i font sono caricati
+    }
+  }, [fontsLoaded]);
+
+  useEffect(() => {
+    loadFonts();
+  }, []);
+
   if (!fontsLoaded) {
-    return (
-      <AppLoading
-        startAsync={loadFonts}
-        onFinish={() => setFontsLoaded(true)}
-        onError={console.warn}
-      />
-    );
+    return null; // Mostra la splash screen finché i font non sono caricati
   }
 
   const handleSave = async () => {
@@ -51,39 +61,41 @@ const AssetCreator = ({ navigation }: { navigation: any }) => {
   };
 
   return (
-    <View style={styles.container}>
-      {/* Anteprima */}
-      <ImageBackground
-        source={typeof logo === 'string' ? { uri: logo } : logo}
-        style={styles.previewBox}
-        imageStyle={styles.previewImage} // Stile per l'immagine di sfondo
-      >
-        <Text style={[styles.previewText, { color: color || '#ffffff', fontFamily: font || 'System' }]}>
-          {title}
-        </Text>
-      </ImageBackground>
+    <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
+      <View style={styles.container}>
+        {/* Anteprima */}
+        <ImageBackground
+          source={typeof logo === 'string' ? { uri: logo } : logo}
+          style={styles.previewBox}
+          imageStyle={styles.previewImage} // Stile per l'immagine di sfondo
+        >
+          <Text style={[styles.previewText, { color: color || '#ffffff', fontFamily: font || 'System' }]}>
+            {title}
+          </Text>
+        </ImageBackground>
 
-      {/* Input per il titolo */}
-      <TextInput
-        style={styles.input}
-        placeholder="Enter title"
-        value={title}
-        onChangeText={setTitle}
-      />
-
-      {/* Selettori */}
-      <ImageSelector logo={logo} setLogo={setLogo} />
-      <ColorSelector color={color} setColor={setColor} />
-      <FontSelector font={font} setFont={setFont} />
-
-      {/* Pulsante Salva */}
-      <View style={styles.saveButtonContainer}>
-        <Button
-          title="Save"
-          onPress={handleSave}
-          disabled={!logo || !color || !font || !title}
-          color="tomato"
+        {/* Input per il titolo */}
+        <TextInput
+          style={styles.input}
+          placeholder="Enter title"
+          value={title}
+          onChangeText={setTitle}
         />
+
+        {/* Selettori */}
+        <ImageSelector logo={logo} setLogo={setLogo} />
+        <ColorSelector color={color} setColor={setColor} />
+        <FontSelector font={font} setFont={setFont} />
+
+        {/* Pulsante Salva */}
+        <View style={styles.saveButtonContainer}>
+          <Button
+            title="Save"
+            onPress={handleSave}
+            disabled={!logo || !color || !font || !title}
+            color="tomato"
+          />
+        </View>
       </View>
     </View>
   );
@@ -99,6 +111,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 20,
+    height: 250,
     padding: 20,
     borderWidth: 1,
     borderColor: '#ddd',
