@@ -2,29 +2,26 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './src/components/HomeScreen';
-import LogoEditor from './src/components/LogoEditor';
-import ColorPaletteManager from './src/components/ColorPaletteManager';
-import FontPicker from './src/components/FontPicker';
+import AssetCreator from './src/components/AssetCreator';
 import BrandKit from './src/components/BrandKit';
 
 const Stack = createStackNavigator();
 
 const App = () => {
-  const handleFontSelect = (font: string) => {
-    console.log('Selected font:', font);
-  };
-
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="LogoEditor" component={LogoEditor} />
-        <Stack.Screen name="ColorPaletteManager" component={ColorPaletteManager} />
+      <Stack.Navigator>
         <Stack.Screen
-          name="FontPicker"
-          children={(props) => <FontPicker {...props} onSelectFont={handleFontSelect} />}
+          name="Home"
+          component={HomeScreen}
+          options={{ title: 'Assets' }}
         />
-        <Stack.Screen name="BrandKit" component={BrandKit} />
+        <Stack.Screen
+          name="Asset Creator"
+          component={AssetCreator}
+          options={{ presentation: 'modal', headerShown: false }} // Modale
+        />
+        <Stack.Screen name="Brand Kit" component={BrandKit} />
       </Stack.Navigator>
     </NavigationContainer>
   );

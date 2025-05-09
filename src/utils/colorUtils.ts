@@ -1,5 +1,5 @@
 export const fonts = [
-    { fontFamily: 'Arial' },
-    { fontFamily: 'Roboto' },
-    { fontFamily: 'Times New Roman' },
+  { "CalSans-Regular": require('../../assets/fonts/CalSans-Regular.ttf') },
+  { "Roboto-Medium": require('../../assets/fonts/Roboto-Medium.ttf') },
+  { "Tagesschrift-Regular": require('../../assets/fonts/Tagesschrift-Regular.ttf') },
 ];

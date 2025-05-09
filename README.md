@@ -1,72 +1,79 @@
-# BrandKit App – Specifications
+# BrandKit App – Specifiche
 
-## Overview
+## Panoramica
 
-BrandKit is a mobile app for artists and creatives to manage their brand identity. The app allows users to:
-- Create and customize logos
-- Build and save color palettes
-- Choose and save preferred fonts
-All brand assets are organized in a personal brand kit.
+BrandKit è un'app mobile progettata per artisti e creativi che desiderano gestire la propria identità visiva. L'app consente agli utenti di:
+- Creare e personalizzare loghi
+- Costruire e salvare palette di colori
+- Scegliere e salvare font preferiti
+Tutti gli asset del brand sono organizzati in un kit personale.
 
-## Features
+## Funzionalità
 
-### 1. Home Screen
-- Navigation to: Logo Editor, Color Palette Manager, Font Picker, and Brand Kit summary
-- Display of last saved logo, palette, and font
+### 1. Schermata Home
+- Visualizza una lista di asset salvati (loghi, palette di colori, font).
+- Ogni elemento mostra:
+  - **Titolo**: Il nome dell'asset.
+  - **Data e ora di creazione**.
+- Pulsante per eliminare un asset.
+- Pulsante per accedere alla schermata di creazione di un nuovo asset.
 
-### 2. Logo Editor
-- Input: Brand name (text)
-- Select font (from saved or default list)
-- Select color (from palette or color picker)
-- Optionally add an icon (from a built-in icon library)
-- Preview logo in real time
-- Save logo to Brand Kit
+### 2. Creazione di un Asset
+- **Anteprima in tempo reale**:
+  - L'immagine selezionata viene mostrata come sfondo.
+  - Il titolo è centrato sopra l'immagine con uno sfondo semi-trasparente.
+- **Personalizzazione**:
+  - Selezione di un'immagine (locale o remota).
+  - Scelta di un colore per il testo.
+  - Scelta di un font tra quelli disponibili.
+  - Inserimento di un titolo.
+- **Salvataggio**:
+  - Gli asset vengono salvati localmente utilizzando `AsyncStorage`.
 
-### 3. Color Palette Manager
-- Add colors using a color picker
-- Display palette as a row of color swatches
-- Remove colors from the palette
-- Save palette to Brand Kit
+### 3. Selettori
+- **Selettore di immagini**:
+  - Mostra una lista di immagini locali tra cui scegliere.
+  - Evidenzia l'immagine selezionata.
+- **Selettore di colori**:
+  - Mostra una lista di colori predefiniti.
+  - Evidenzia il colore selezionato.
+- **Selettore di font**:
+  - Mostra una lista di font disponibili.
+  - Evidenzia il font selezionato.
 
-### 4. Font Picker
-- Browse a list of available fonts (system fonts or Google Fonts)
-- Preview sample text in each font
-- Select and save preferred font(s) to Brand Kit
+### 4. Persistenza dei dati
+- Tutti i dati (loghi, colori, font) vengono salvati localmente sul dispositivo utilizzando `AsyncStorage`.
 
-### 5. Brand Kit
-- View all saved brand assets: logos, palettes, fonts
-- Option to edit or delete each asset
+## Requisiti tecnici
 
-### 6. Data Persistence
-- All user data (logos, palettes, fonts) must be saved locally on the device (use AsyncStorage or similar)
+- **Framework**: React Native (Expo)
+- **Struttura dei componenti**: Componenti funzionali con hook
+- **Navigazione**: React Navigation
+- **Stile**: StyleSheet
+- **Dipendenze principali**:
+  - `@react-native-async-storage/async-storage` per la persistenza dei dati
+  - `expo-font` per il caricamento dei font
+  - `react-native-vector-icons` per le icone
+  - `react-native-reanimated` per animazioni avanzate
 
-## Technical Requirements
+## Flusso utente
 
-- **Framework:** React Native (Expo)
-- **Component structure:** Use functional components and hooks
-- **Navigation:** Simple state management (no navigation library needed for MVP)
-- **Styling:** Use StyleSheet or styled-components
-- **Dependencies:**  
-  - `react-native-color-picker` for color selection  
-  - `expo-font` for font loading (optional)
-  - `react-native-svg` for logo rendering (optional)
-  - `@react-native-async-storage/async-storage` for data persistence
+1. L'utente apre l'app e atterra sulla schermata Home.
+2. L'utente può:
+   - Visualizzare gli asset salvati.
+   - Creare un nuovo asset.
+3. Durante la creazione di un asset:
+   - L'utente seleziona un'immagine, un colore, un font e inserisce un titolo.
+   - L'utente visualizza un'anteprima in tempo reale.
+   - L'utente salva l'asset.
+4. Gli asset salvati sono visibili nella schermata Home, dove possono essere eliminati.
 
-## Stretch Goals (Optional)
-- Export logo as PNG/SVG
-- Share brand assets via email or social media
-- Support for multiple brand kits
-- Cloud sync (future)
-
-## User Flow
-
-1. User opens app and lands on Home Screen
-2. User navigates to create a logo, build a palette, or pick a font
-3. User saves each asset to their Brand Kit
-4. User can view, edit, or delete assets from the Brand Kit
+## Obiettivi futuri (Stretch Goals)
+- Esportazione del logo come PNG/SVG.
+- Condivisione degli asset tramite email o social media.
+- Supporto per più kit di brand.
+- Sincronizzazione cloud.
 
 ---
 
-**End of specification.**
-
-You can copy-paste this into your repository. If you want it in Italian or need further details, let me know!
+**Nota**: Se hai bisogno di ulteriori dettagli o traduzioni, fammi sapere!

@@ -25,3 +25,10 @@ export interface BrandKit {
     colorPalettes: ColorPalette[];
     fonts: Font[];
 }
+export interface Asset {
+    id: string;
+    logo: string; // URL o percorso del logo
+    color: string; // Codice colore (es. #FFFFFF)
+    font: string; // Nome del font
+    title: string; // Titolo dell'asset
+  }
