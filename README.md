@@ -1,79 +1,79 @@
-# BrandKit App – Specifiche
+# BrandKit App – Specifications
 
-## Panoramica
+## Overview
 
-BrandKit è un'app mobile progettata per artisti e creativi che desiderano gestire la propria identità visiva. L'app consente agli utenti di:
-- Creare e personalizzare loghi
-- Costruire e salvare palette di colori
-- Scegliere e salvare font preferiti
-Tutti gli asset del brand sono organizzati in un kit personale.
+BrandKit is a mobile application designed for artists and creatives looking to manage their visual identity. The app allows users to:
+- Create and customise logos
+- Build and save colour palettes
+- Choose and save favourite fonts
+All brand assets are organised into a personal kit.
 
-## Funzionalità
+## Features
 
-### 1. Schermata Home
-- Visualizza una lista di asset salvati (loghi, palette di colori, font).
-- Ogni elemento mostra:
-  - **Titolo**: Il nome dell'asset.
-  - **Data e ora di creazione**.
-- Pulsante per eliminare un asset.
-- Pulsante per accedere alla schermata di creazione di un nuovo asset.
+### 1. Home Screen
+- Displays a list of saved assets (logos, colour palettes, fonts).
+- Each item shows:
+  - **Title**: The name of the asset.
+  - **Creation date and time**.
+- Button to delete an asset.
+- Button to navigate to the new asset creation screen.
 
-### 2. Creazione di un Asset
-- **Anteprima in tempo reale**:
-  - L'immagine selezionata viene mostrata come sfondo.
-  - Il titolo è centrato sopra l'immagine con uno sfondo semi-trasparente.
-- **Personalizzazione**:
-  - Selezione di un'immagine (locale o remota).
-  - Scelta di un colore per il testo.
-  - Scelta di un font tra quelli disponibili.
-  - Inserimento di un titolo.
-- **Salvataggio**:
-  - Gli asset vengono salvati localmente utilizzando `AsyncStorage`.
+### 2. Asset Creation
+- **Real-time Preview**:
+  - The selected image is displayed as the background.
+  - The title is centred above the image with a semi-transparent background.
+- **Customisation**:
+  - Selection of an image (local or remote).
+  - Choice of a text colour.
+  - Choice of a font from the available options.
+  - Input of a title.
+- **Saving**:
+  - Assets are saved locally using `AsyncStorage`.
 
-### 3. Selettori
-- **Selettore di immagini**:
-  - Mostra una lista di immagini locali tra cui scegliere.
-  - Evidenzia l'immagine selezionata.
-- **Selettore di colori**:
-  - Mostra una lista di colori predefiniti.
-  - Evidenzia il colore selezionato.
-- **Selettore di font**:
-  - Mostra una lista di font disponibili.
-  - Evidenzia il font selezionato.
+### 3. Selectors
+- **Image Selector**:
+  - Shows a list of local images to choose from.
+  - Highlights the selected image.
+- **Colour Selector**:
+  - Shows a list of predefined colours.
+  - Highlights the selected colour.
+- **Font Selector**:
+  - Shows a list of available fonts.
+  - Highlights the selected font.
 
-### 4. Persistenza dei dati
-- Tutti i dati (loghi, colori, font) vengono salvati localmente sul dispositivo utilizzando `AsyncStorage`.
+### 4. Data Persistence
+- All data (logos, colours, fonts) is saved locally on the device using `AsyncStorage`.
 
-## Requisiti tecnici
+## Technical Requirements
 
 - **Framework**: React Native (Expo)
-- **Struttura dei componenti**: Componenti funzionali con hook
-- **Navigazione**: React Navigation
-- **Stile**: StyleSheet
-- **Dipendenze principali**:
-  - `@react-native-async-storage/async-storage` per la persistenza dei dati
-  - `expo-font` per il caricamento dei font
-  - `react-native-vector-icons` per le icone
-  - `react-native-reanimated` per animazioni avanzate
+- **Component Structure**: Functional components with hooks
+- **Navigation**: React Navigation
+- **Styling**: StyleSheet
+- **Main Dependencies**:
+  - `@react-native-async-storage/async-storage` for data persistence
+  - `expo-font` for font loading
+  - `react-native-vector-icons` for icons
+  - `react-native-reanimated` for advanced animations
 
-## Flusso utente
+## User Flow
 
-1. L'utente apre l'app e atterra sulla schermata Home.
-2. L'utente può:
-   - Visualizzare gli asset salvati.
-   - Creare un nuovo asset.
-3. Durante la creazione di un asset:
-   - L'utente seleziona un'immagine, un colore, un font e inserisce un titolo.
-   - L'utente visualizza un'anteprima in tempo reale.
-   - L'utente salva l'asset.
-4. Gli asset salvati sono visibili nella schermata Home, dove possono essere eliminati.
+1. The user opens the app and lands on the Home screen.
+2. The user can:
+   - View saved assets.
+   - Create a new asset.
+3. During asset creation:
+   - The user selects an image, a colour, a font, and enters a title.
+   - The user sees a real-time preview.
+   - The user saves the asset.
+4. Saved assets are visible on the Home screen, where they can be deleted.
 
-## Obiettivi futuri (Stretch Goals)
-- Esportazione del logo come PNG/SVG.
-- Condivisione degli asset tramite email o social media.
-- Supporto per più kit di brand.
-- Sincronizzazione cloud.
+## Future Goals (Stretch Goals)
+- Exporting the logo as PNG/SVG.
+- Sharing assets via email or social media.
+- Support for multiple brand kits.
+- Cloud synchronisation.
 
 ---
 
-**Nota**: Se hai bisogno di ulteriori dettagli o traduzioni, fammi sapere!
+**Note**: If you need any further details or translations, just let me know!
